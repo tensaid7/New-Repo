@@ -1,17 +1,8 @@
 
 public class MyIntArraylist implements MyIntList {
-    int storage[];
     int capacity = 100;
+    int[] storage = new int[capacity];
     int size = 0;
-
-    public MyIntArraylist() {
-        this(100);
-    }
-
-    public MyIntArraylist(int capacity) {
-        this.capacity = capacity;
-        storage = new int[capacity];
-    }
 
     @Override
     public int size() {
@@ -28,7 +19,7 @@ public class MyIntArraylist implements MyIntList {
     }
 
     @Override
-    public void remove(int i) {
+    public void remove(int i) throws IndexOutOfBoundsException{
         if (i >= 0 && i < size){
             for (int j = i; j < size - 1; j++){
                 storage[j] = storage[j+1];
@@ -67,12 +58,12 @@ public class MyIntArraylist implements MyIntList {
 
     @Override
     public boolean equals(MyIntList otherList) {
-        if (otherList == null || this.size != otherList.size()){
+        if (otherList == null || size != otherList.size()){
             return false;
         }
 
         for (int i = 0; i < size; i++) {
-            if (this.get(i) != otherList.get(i)) {
+            if (storage[i] != otherList.get(i)) {
                 return false;
             }
         }
@@ -86,7 +77,7 @@ public class MyIntArraylist implements MyIntList {
             throw new IllegalArgumentException("Другой список не может быть null");
         }
         for (int i = 0; i < otherList.size(); i++) {
-            this.add(otherList.get(i));
+            add(otherList.get(i));
         }
     }
     
